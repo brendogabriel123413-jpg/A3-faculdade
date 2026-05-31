@@ -1,292 +1,529 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>meu site</title>
-</head>
-<body>
-    <p>ola seja bem vindo ao meu site </p>   
-</body>
+<head> <project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.5.0</version>
+    </parent>
+
+    <groupId>com.estacionamento</groupId>
+    <artifactId>estacionamento-pro</artifactId>
+    <version>1.0.0</version>
+
+    <properties>
+        <java.version>21</java.version>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itextpdf</artifactId>
+            <version>5.5.13.3</version>
+        </dependency>
+
+    </dependencies>
+
+</project> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Document</title>
+</head> 
+<body> 
+    
+</body> 
 </html> <!DOCTYPE html>
-<html lang="pt-BR">
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pizzaria Bella Massa</title>
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
-}
+    <title>Login</title>
 
-body{
-    background:#fff;
-    color:#333;
-}
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet">
 
-header{
-    background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
-    url('https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1400&q=80');
-    background-size:cover;
-    background-position:center;
-    height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    color:white;
-}
-
-.hero{
-    max-width:800px;
-}
-
-.hero h1{
-    font-size:4rem;
-    margin-bottom:20px;
-}
-
-.hero p{
-    font-size:1.3rem;
-    margin-bottom:30px;
-}
-
-.btn{
-    background:#e63946;
-    color:white;
-    padding:15px 35px;
-    border:none;
-    border-radius:50px;
-    text-decoration:none;
-    font-size:1.1rem;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.btn:hover{
-    background:#c1121f;
-}
-
-section{
-    padding:80px 10%;
-}
-
-.titulo{
-    text-align:center;
-    margin-bottom:50px;
-}
-
-.titulo h2{
-    font-size:2.5rem;
-    color:#e63946;
-}
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:25px;
-}
-
-.card{
-    background:#fff;
-    border-radius:15px;
-    overflow:hidden;
-    box-shadow:0 5px 20px rgba(0,0,0,.1);
-}
-
-.card img{
-    width:100%;
-    height:220px;
-    object-fit:cover;
-}
-
-.card-content{
-    padding:20px;
-}
-
-.card-content h3{
-    margin-bottom:10px;
-}
-
-.preco{
-    color:#e63946;
-    font-size:1.4rem;
-    font-weight:bold;
-}
-
-.promocao{
-    background:#e63946;
-    color:white;
-    text-align:center;
-}
-
-.promocao h2{
-    font-size:3rem;
-    margin-bottom:20px;
-}
-
-.formulario{
-    max-width:600px;
-    margin:auto;
-}
-
-input, select, textarea{
-    width:100%;
-    padding:15px;
-    margin-bottom:15px;
-    border:1px solid #ddd;
-    border-radius:10px;
-}
-
-button{
-    width:100%;
-    padding:15px;
-    border:none;
-    background:#e63946;
-    color:white;
-    font-size:1.1rem;
-    border-radius:10px;
-    cursor:pointer;
-}
-
-button:hover{
-    background:#c1121f;
-}
-
-footer{
-    background:#111;
-    color:white;
-    text-align:center;
-    padding:30px;
-}
-
-#mensagem{
-    margin-top:20px;
-    text-align:center;
-    font-weight:bold;
-    color:green;
-}
-
-@media(max-width:768px){
-    .hero h1{
-        font-size:2.5rem;
-    }
-
-    .hero p{
-        font-size:1rem;
-    }
-}
-</style>
 </head>
+
 <body>
 
-<header>
-    <div class="hero">
-        <h1>🍕 Bella Massa</h1>
-        <p>As melhores pizzas artesanais da cidade entregues na sua casa.</p>
-        <a href="#pedido" class="btn">Peça Agora</a>
-    </div>
-</header>
+<div class="container mt-5">
 
-<section>
-    <div class="titulo">
-        <h2>Nosso Cardápio</h2>
-    </div>
+    <div class="row justify-content-center">
 
-    <div class="cards">
+        <div class="col-md-4">
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80">
-            <div class="card-content">
-                <h3>Calabresa</h3>
-                <p>Molho especial, queijo e calabresa.</p>
-                <div class="preco">R$ 39,90</div>
+            <div class="card">
+
+                <div class="card-body">
+
+                    <h3 class="text-center">
+                        Login
+                    </h3>
+
+                    <form
+                            method="post"
+                            action="/login">
+
+                        <div class="mb-3">
+
+                            <label>Email</label>
+
+                            <input
+                                    name="username"
+                                    class="form-control">
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label>Senha</label>
+
+                            <input
+                                    type="password"
+                                    name="password"
+                                    class="form-control">
+
+                        </div>
+
+                        <button
+                                class="btn btn-primary w-100">
+
+                            Entrar
+
+                        </button>
+
+                    </form>
+
+                </div>
+
             </div>
+
         </div>
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1594007654729-407eedc4be65?auto=format&fit=crop&w=800&q=80">
-            <div class="card-content">
-                <h3>Frango com Catupiry</h3>
-                <p>Frango desfiado e catupiry cremoso.</p>
-                <div class="preco">R$ 44,90</div>
-            </div>
+    </div>
+
+</div>
+
+</body>
+
+</html> <!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <title>Dashboard</title>
+
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet">
+
+    <link
+            rel="stylesheet"
+            href="/css/dashboard.css">
+
+</head>
+
+<body>
+
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-md-2 sidebar">
+
+            <h3>Parking Pro</h3>
+
+            <hr>
+
+            <a href="/dashboard">
+                Dashboard
+            </a>
+
         </div>
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80">
-            <div class="card-content">
-                <h3>Marguerita</h3>
-                <p>Mussarela, tomate e manjericão.</p>
-                <div class="preco">R$ 42,90</div>
+        <div class="col-md-10">
+
+            <h1 class="mt-4">
+                Dashboard
+            </h1>
+
+            <div class="row mt-4">
+
+                <div class="col-md-3">
+
+                    <div class="card shadow">
+
+                        <div class="card-body">
+
+                            <h5>
+                                Vagas Livres
+                            </h5>
+
+                            <h2
+                               th:text="${dashboard.vagasLivres}">
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <div class="card shadow">
+
+                        <div class="card-body">
+
+                            <h5>
+                                Vagas Ocupadas
+                            </h5>
+
+                            <h2
+                               th:text="${dashboard.vagasOcupadas}">
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <div class="card shadow">
+
+                        <div class="card-body">
+
+                            <h5>
+                                Veículos Ativos
+                            </h5>
+
+                            <h2
+                               th:text="${dashboard.veiculosAtivos}">
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <div class="card shadow">
+
+                        <div class="card-body">
+
+                            <h5>
+                                Faturamento
+                            </h5>
+
+                            <h2>
+
+                                R$
+
+                                <span
+                                   th:text="${dashboard.faturamento}">
+                                </span>
+
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
+
+            <hr>
+
+            <div class="row mt-5">
+
+                <div class="col-md-6">
+
+                    <div class="card">
+
+                        <div class="card-body">
+
+                            <h4>
+                                Entrada
+                            </h4>
+
+                            <form
+                               action="/estacionamento/entrada"
+                               method="post">
+
+                                <input
+                                    class="form-control mb-3"
+                                    name="placa"
+                                    placeholder="Placa">
+
+                                <input
+                                    class="form-control mb-3"
+                                    name="modelo"
+                                    placeholder="Modelo">
+
+                                <button
+                                    class="btn btn-success">
+
+                                    Registrar
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="card">
+
+                        <div class="card-body">
+
+                            <h4>
+                                Saída
+                            </h4>
+
+                            <form
+                               action="/estacionamento/saida"
+                               method="post">
+
+                                <input
+                                    class="form-control mb-3"
+                                    name="placa"
+                                    placeholder="Placa">
+
+                                <button
+                                    class="btn btn-danger">
+
+                                    Finalizar
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
 
     </div>
-</section>
 
-<section class="promocao">
-    <h2>🔥 Promoção Especial</h2>
-    <p>Compre 2 pizzas grandes e ganhe um refrigerante grátis.</p>
-</section>
+</div>
 
-<section id="pedido">
-    <div class="titulo">
-        <h2>Faça Seu Pedido</h2>
-    </div>
+</body>
 
-    <div class="formulario">
-        <form id="pedidoForm">
+</html> <hr>
 
-            <input type="text" id="nome" placeholder="Seu nome" required>
+<h3>
+    Veículos Estacionados
+</h3>
 
-            <input type="tel" id="telefone" placeholder="Telefone" required>
+<table class="table table-striped">
 
-            <select id="pizza">
-                <option>Calabresa</option>
-                <option>Frango com Catupiry</option>
-                <option>Marguerita</option>
-            </select>
+    <thead>
 
-            <input type="number" id="quantidade" min="1" value="1">
+    <tr>
 
-            <textarea id="endereco" rows="4" placeholder="Endereço para entrega"></textarea>
+        <th>Placa</th>
 
-            <button type="submit">Enviar Pedido</button>
+        <th>Modelo</th>
 
-        </form>
+        <th>Vaga</th>
 
-        <div id="mensagem"></div>
-    </div>
-</section>
+        <th>Entrada</th>
 
-<footer>
-    <p>🍕 Bella Massa • Delivery todos os dias • (11) 99999-9999</p>
-</footer>
+    </tr>
 
-<script>
-document.getElementById("pedidoForm")
-.addEventListener("submit", function(e){
+    </thead>
 
-    e.preventDefault();
+    <tbody>
 
-    const nome = document.getElementById("nome").value;
-    const pizza = document.getElementById("pizza").value;
-    const quantidade = document.getElementById("quantidade").value;
+    <tr
+      th:each="ticket : ${ativos}">
 
-    document.getElementById("mensagem").innerHTML =
-        `Pedido enviado com sucesso!<br>
-         Cliente: ${nome}<br>
-         Pizza: ${pizza}<br>
-         Quantidade: ${quantidade}`;
+        <td
+          th:text="${ticket.veiculo.placa}">
+        </td>
 
-    this.reset();
+        <td
+          th:text="${ticket.veiculo.modelo}">
+        </td>
+
+        <td
+          th:text="${ticket.vaga.numero}">
+        </td>
+
+        <td
+          th:text="${ticket.entrada}">
+        </td>
+
+    </tr>
+
+    </tbody>
+
+</table>
+<input
+        id="busca"
+        class="form-control mb-3"
+        placeholder="Pesquisar placa">
+        <script>
+
+document
+.getElementById("busca")
+
+.addEventListener(
+
+"keyup",
+
+function(){
+
+let filtro =
+this.value.toUpperCase();
+
+let linhas =
+document.querySelectorAll(
+"table tbody tr"
+);
+
+linhas.forEach(
+
+linha => {
+
+let texto =
+linha.innerText
+.toUpperCase();
+
+linha.style.display =
+
+texto.includes(
+filtro
+)
+
+?
+
+""
+
+:
+
+"none";
+
 });
+
+});
+
+</script>
+<script
+src="https://cdn.jsdelivr.net/npm/chart.js">
 </script>
 
-</body>
-</html>
+<div class="card mt-4">
+
+    <div class="card-body">
+
+        <canvas
+          id="grafico">
+        </canvas>
+
+    </div>
+
+</div>
+<script>
+
+new Chart(
+
+document
+.getElementById(
+"grafico"
+),
+
+{
+
+type:'doughnut',
+
+data:{
+
+labels:[
+'Livres',
+'Ocupadas'
+],
+
+datasets:[{
+
+data: [
+
+[[${dashboard.vagasLivres}]] ,
+
+[[${dashboard.vagasOcupadas}]]
+
+]
+
+}]
+
+}
+
+}
+
+);
+
+</script>
+<script>
+
+setInterval(
+
+() => {
+
+location.reload();
+
+},
+
+30000
+
+);
+
+</script>
