@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>meu site</title>
+</head>
+<body>
+    <p>ola seja bem vindo ao meu site </p>   
+</body>
+</html> import view.MenuView;
+
+ public class Main {
+
+    public static void main(String[] args) {
+
+        MenuView menu = new MenuView();
+        menu.iniciar();
+    }
+}
+
+package controller;
+
+import model.Ticket;
+import model.Veiculo;
+
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
+
+public class EstacionamentoController {
+
+    private List<Ticket> tickets = new ArrayList<>();
+
+    public void registrarEntrada(String placa, String modelo) {
+
+        Veiculo veiculo = new Veiculo(placa, modelo);
+        Ticket ticket = new Ticket(veiculo);
+
+        tickets.add(ticket);
+
+        System.out.println("Entrada registrada com sucesso.");
+    }
+
+    public void registrarSaida(String placa) {
+
+        for (Ticket ticket : tickets) {
+
+            if (ticket.getVeiculo().getPlaca().equalsIgnoreCase(placa)
+                    && ticket.getSaida() == null) {
+
+                ticket.registrarSaida();
+
+                long horas = Duration.between(
+                        ticket.getEntrada(),
+                        ticket.getSaida()
+                ).toHours();
+
+                if (horas == 0) {
+                    horas = 1;
+                }
+
+                double valor = calcularValor(horas);
+
+                System.out.println("Tempo: " + horas + " hora(s)");
+                System.out.println("Valor a pagar: R$ " + valor);
+
+                return;
+            }
+        }
+
+        System.out.println("Veículo não encontrado.");
+    }
+
+    private double calcularValor(long horas) {
+
+        double valor = 12.0;
+
+        if (horas > 1) {
+            valor += (horas - 1) * 6;
+        }
+
+        if (valor > 50) {
+            valor = 50;
+        }
+
+        return valor;
+    }
+
+    public void listarVeiculos() {
+
+        for (Ticket ticket : tickets) {
+
+            if (ticket.getSaida() == null) {
+
+                System.out.println(
+                        "Placa: "
+                        + ticket.getVeiculo().getPlaca()
+                        + " | Modelo: "
+                        + ticket.getVeiculo().getModelo()
+                );
+            }
+        }
+    }
+}
+package model;
+
+import java.time.LocalDateTime;
+
+public class Ticket {
+
+    private Veiculo veiculo;
+    private LocalDateTime entrada;
+    private LocalDateTime saida;
+
+    public Ticket(Veiculo veiculo) {
+        this.veiculo = veiculo;
+        this.entrada = LocalDateTime.now();
+    }
+
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
+
+    public LocalDateTime getEntrada() {
+        return entrada;
+    }
+
+    public LocalDateTime getSaida() {
+        return saida;
+    }
+
+    public void registrarSaida() {
+        saida = LocalDateTime.now();
+    }
+}
+package model;
+
+public class Vaga {
+
+    private int numero;
+    private boolean ocupada;
+
+    public Vaga(int numero) {
+        this.numero = numero;
+        this.ocupada = false;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public boolean isOcupada() {
+        return ocupada;
+    }
+
+    public void ocupar() {
+        ocupada = true;
+    }
+
+    public void liberar() {
+        ocupada = false;
+    }
+}
+public class Estacionamento {
+
+    private List<Ticket> tickets;
+    private List<Vaga> vagas;
+
+}
+package view;
+
+import controller.EstacionamentoController;
+
+import java.util.Scanner;
+
+public class MenuView {
+
+    private Scanner scanner = new Scanner(System.in);
+    private EstacionamentoController controller =
+            new EstacionamentoController();
+
+    public void iniciar() {
+
+        int opcao;
+
+        do {
+
+            System.out.println("\n===== ESTACIONAMENTO =====");
+            System.out.println("1 - Registrar Entrada");
+            System.out.println("2 - Registrar Saída");
+            System.out.println("3 - Veículos Estacionados");
+            System.out.println("0 - Sair");
+            System.out.print("Opção: ");
+
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (opcao) {
+
+                case 1:
+                    entrada();
+                    break;
+
+                case 2:
+                    saida();
+                    break;
+
+                case 3:
+                    controller.listarVeiculos();
+                    break;
+
+                case 0:
+                    System.out.println("Encerrando...");
+                    break;
+
+                default:
+                    System.out.println("Opção inválida.");
+            }
+
+        } while (opcao != 0);
+    }
+
+    private void entrada() {
+
+        System.out.print("Placa: ");
+        String placa = scanner.nextLine();
+
+        System.out.print("Modelo: ");
+        String modelo = scanner.nextLine();
+
+        controller.registrarEntrada(placa, modelo);
+    }
+
+    private void saida() {
+
+        System.out.print("Placa: ");
+        String placa = scanner.nextLine();
+
+        controller.registrarSaida(placa);
+    }
+}
