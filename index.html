@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,235 +8,285 @@
 <body>
     <p>ola seja bem vindo ao meu site </p>   
 </body>
-</html> import view.MenuView;
+</html> <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pizzaria Bella Massa</title>
 
- public class Main {
-
-    public static void main(String[] args) {
-
-        MenuView menu = new MenuView();
-        menu.iniciar();
-    }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
-package controller;
+body{
+    background:#fff;
+    color:#333;
+}
 
-import model.Ticket;
-import model.Veiculo;
+header{
+    background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+    url('https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1400&q=80');
+    background-size:cover;
+    background-position:center;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:white;
+}
 
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
+.hero{
+    max-width:800px;
+}
 
-public class EstacionamentoController {
+.hero h1{
+    font-size:4rem;
+    margin-bottom:20px;
+}
 
-    private List<Ticket> tickets = new ArrayList<>();
+.hero p{
+    font-size:1.3rem;
+    margin-bottom:30px;
+}
 
-    public void registrarEntrada(String placa, String modelo) {
+.btn{
+    background:#e63946;
+    color:white;
+    padding:15px 35px;
+    border:none;
+    border-radius:50px;
+    text-decoration:none;
+    font-size:1.1rem;
+    cursor:pointer;
+    transition:.3s;
+}
 
-        Veiculo veiculo = new Veiculo(placa, modelo);
-        Ticket ticket = new Ticket(veiculo);
+.btn:hover{
+    background:#c1121f;
+}
 
-        tickets.add(ticket);
+section{
+    padding:80px 10%;
+}
 
-        System.out.println("Entrada registrada com sucesso.");
+.titulo{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.titulo h2{
+    font-size:2.5rem;
+    color:#e63946;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:#fff;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,.1);
+}
+
+.card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.card-content{
+    padding:20px;
+}
+
+.card-content h3{
+    margin-bottom:10px;
+}
+
+.preco{
+    color:#e63946;
+    font-size:1.4rem;
+    font-weight:bold;
+}
+
+.promocao{
+    background:#e63946;
+    color:white;
+    text-align:center;
+}
+
+.promocao h2{
+    font-size:3rem;
+    margin-bottom:20px;
+}
+
+.formulario{
+    max-width:600px;
+    margin:auto;
+}
+
+input, select, textarea{
+    width:100%;
+    padding:15px;
+    margin-bottom:15px;
+    border:1px solid #ddd;
+    border-radius:10px;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    background:#e63946;
+    color:white;
+    font-size:1.1rem;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#c1121f;
+}
+
+footer{
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:30px;
+}
+
+#mensagem{
+    margin-top:20px;
+    text-align:center;
+    font-weight:bold;
+    color:green;
+}
+
+@media(max-width:768px){
+    .hero h1{
+        font-size:2.5rem;
     }
 
-    public void registrarSaida(String placa) {
-
-        for (Ticket ticket : tickets) {
-
-            if (ticket.getVeiculo().getPlaca().equalsIgnoreCase(placa)
-                    && ticket.getSaida() == null) {
-
-                ticket.registrarSaida();
-
-                long horas = Duration.between(
-                        ticket.getEntrada(),
-                        ticket.getSaida()
-                ).toHours();
-
-                if (horas == 0) {
-                    horas = 1;
-                }
-
-                double valor = calcularValor(horas);
-
-                System.out.println("Tempo: " + horas + " hora(s)");
-                System.out.println("Valor a pagar: R$ " + valor);
-
-                return;
-            }
-        }
-
-        System.out.println("Veículo não encontrado.");
-    }
-
-    private double calcularValor(long horas) {
-
-        double valor = 12.0;
-
-        if (horas > 1) {
-            valor += (horas - 1) * 6;
-        }
-
-        if (valor > 50) {
-            valor = 50;
-        }
-
-        return valor;
-    }
-
-    public void listarVeiculos() {
-
-        for (Ticket ticket : tickets) {
-
-            if (ticket.getSaida() == null) {
-
-                System.out.println(
-                        "Placa: "
-                        + ticket.getVeiculo().getPlaca()
-                        + " | Modelo: "
-                        + ticket.getVeiculo().getModelo()
-                );
-            }
-        }
+    .hero p{
+        font-size:1rem;
     }
 }
-package model;
+</style>
+</head>
+<body>
 
-import java.time.LocalDateTime;
+<header>
+    <div class="hero">
+        <h1>🍕 Bella Massa</h1>
+        <p>As melhores pizzas artesanais da cidade entregues na sua casa.</p>
+        <a href="#pedido" class="btn">Peça Agora</a>
+    </div>
+</header>
 
-public class Ticket {
+<section>
+    <div class="titulo">
+        <h2>Nosso Cardápio</h2>
+    </div>
 
-    private Veiculo veiculo;
-    private LocalDateTime entrada;
-    private LocalDateTime saida;
+    <div class="cards">
 
-    public Ticket(Veiculo veiculo) {
-        this.veiculo = veiculo;
-        this.entrada = LocalDateTime.now();
-    }
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80">
+            <div class="card-content">
+                <h3>Calabresa</h3>
+                <p>Molho especial, queijo e calabresa.</p>
+                <div class="preco">R$ 39,90</div>
+            </div>
+        </div>
 
-    public Veiculo getVeiculo() {
-        return veiculo;
-    }
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1594007654729-407eedc4be65?auto=format&fit=crop&w=800&q=80">
+            <div class="card-content">
+                <h3>Frango com Catupiry</h3>
+                <p>Frango desfiado e catupiry cremoso.</p>
+                <div class="preco">R$ 44,90</div>
+            </div>
+        </div>
 
-    public LocalDateTime getEntrada() {
-        return entrada;
-    }
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80">
+            <div class="card-content">
+                <h3>Marguerita</h3>
+                <p>Mussarela, tomate e manjericão.</p>
+                <div class="preco">R$ 42,90</div>
+            </div>
+        </div>
 
-    public LocalDateTime getSaida() {
-        return saida;
-    }
+    </div>
+</section>
 
-    public void registrarSaida() {
-        saida = LocalDateTime.now();
-    }
-}
-package model;
+<section class="promocao">
+    <h2>🔥 Promoção Especial</h2>
+    <p>Compre 2 pizzas grandes e ganhe um refrigerante grátis.</p>
+</section>
 
-public class Vaga {
+<section id="pedido">
+    <div class="titulo">
+        <h2>Faça Seu Pedido</h2>
+    </div>
 
-    private int numero;
-    private boolean ocupada;
+    <div class="formulario">
+        <form id="pedidoForm">
 
-    public Vaga(int numero) {
-        this.numero = numero;
-        this.ocupada = false;
-    }
+            <input type="text" id="nome" placeholder="Seu nome" required>
 
-    public int getNumero() {
-        return numero;
-    }
+            <input type="tel" id="telefone" placeholder="Telefone" required>
 
-    public boolean isOcupada() {
-        return ocupada;
-    }
+            <select id="pizza">
+                <option>Calabresa</option>
+                <option>Frango com Catupiry</option>
+                <option>Marguerita</option>
+            </select>
 
-    public void ocupar() {
-        ocupada = true;
-    }
+            <input type="number" id="quantidade" min="1" value="1">
 
-    public void liberar() {
-        ocupada = false;
-    }
-}
-public class Estacionamento {
+            <textarea id="endereco" rows="4" placeholder="Endereço para entrega"></textarea>
 
-    private List<Ticket> tickets;
-    private List<Vaga> vagas;
+            <button type="submit">Enviar Pedido</button>
 
-}
-package view;
+        </form>
 
-import controller.EstacionamentoController;
+        <div id="mensagem"></div>
+    </div>
+</section>
 
-import java.util.Scanner;
+<footer>
+    <p>🍕 Bella Massa • Delivery todos os dias • (11) 99999-9999</p>
+</footer>
 
-public class MenuView {
+<script>
+document.getElementById("pedidoForm")
+.addEventListener("submit", function(e){
 
-    private Scanner scanner = new Scanner(System.in);
-    private EstacionamentoController controller =
-            new EstacionamentoController();
+    e.preventDefault();
 
-    public void iniciar() {
+    const nome = document.getElementById("nome").value;
+    const pizza = document.getElementById("pizza").value;
+    const quantidade = document.getElementById("quantidade").value;
 
-        int opcao;
+    document.getElementById("mensagem").innerHTML =
+        `Pedido enviado com sucesso!<br>
+         Cliente: ${nome}<br>
+         Pizza: ${pizza}<br>
+         Quantidade: ${quantidade}`;
 
-        do {
+    this.reset();
+});
+</script>
 
-            System.out.println("\n===== ESTACIONAMENTO =====");
-            System.out.println("1 - Registrar Entrada");
-            System.out.println("2 - Registrar Saída");
-            System.out.println("3 - Veículos Estacionados");
-            System.out.println("0 - Sair");
-            System.out.print("Opção: ");
-
-            opcao = scanner.nextInt();
-            scanner.nextLine();
-
-            switch (opcao) {
-
-                case 1:
-                    entrada();
-                    break;
-
-                case 2:
-                    saida();
-                    break;
-
-                case 3:
-                    controller.listarVeiculos();
-                    break;
-
-                case 0:
-                    System.out.println("Encerrando...");
-                    break;
-
-                default:
-                    System.out.println("Opção inválida.");
-            }
-
-        } while (opcao != 0);
-    }
-
-    private void entrada() {
-
-        System.out.print("Placa: ");
-        String placa = scanner.nextLine();
-
-        System.out.print("Modelo: ");
-        String modelo = scanner.nextLine();
-
-        controller.registrarEntrada(placa, modelo);
-    }
-
-    private void saida() {
-
-        System.out.print("Placa: ");
-        String placa = scanner.nextLine();
-
-        controller.registrarSaida(placa);
-    }
-}
+</body>
+</html>
